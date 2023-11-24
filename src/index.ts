@@ -1,6 +1,6 @@
 
-const http = require('http')
-//import http from 'http'
+//const http = require('http')
+import http from 'http'
 import 'dotenv/config'
 import { PushNotificationAction, RingApi, RingCameraKind } from 'ring-client-api'
 import { skip } from 'rxjs/operators'
@@ -17,6 +17,7 @@ const server = http.createServer((req: any, res: any) => {
   const searchParams = myUrl.searchParams
   const myBib = searchParams.get("bid")
   const MyRefreshToken:string = process.env.REFRESH_TOKEN ?? ""
+
   async function DoorBell(bellId:any) {
     const { env } = process,
       ringApi = new RingApi({
