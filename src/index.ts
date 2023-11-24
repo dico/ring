@@ -33,8 +33,7 @@ const server = http.createServer((req: any, res: any) => {
         const Chimes = location.chimes
         let count = 0
         for (const Chime of Chimes) {
-    // 394630720 - Anatoly
-    // 388700755 - Igor
+    // 394630720 - Anatoly,  388700755 - Igor
           if (Chime.id == bellId) {
             const newRingtone = await Chime.getRingtoneByDescription('Triangle', 'ding')
             Chime.setVolume(2)
