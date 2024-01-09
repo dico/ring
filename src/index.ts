@@ -14,26 +14,28 @@ const server = http.createServer((req: any, res: any) => {
 	const url:any = req.url
 	const myUrl = new URL(url, 'http://0.0.0.0:4000')
 	const searchParams = myUrl.searchParams
-	const myBib = searchParams.get("bid")
+	const myBib = searchParams.get("bid");
 	const MyRefreshToken:string = process.env.REFRESH_TOKEN ?? ""
+	//console.log("Refresh Token:", MyRefreshToken);
+
 
 	async function DoorBell(bellId:any) {
-	const { env } = process,
+		const { env } = process,
 		ringApi = new RingApi({
 			refreshToken : MyRefreshToken,
 			debug: true,
 		}),
-		locations = await ringApi.getLocations()
-		//allCameras = await ringApi.getCameras()
+		locations = await ringApi.getLocations();
 		
 		for (const location of locations) {
-			const devices = await location.getDevices()         
+			//const devices = await location.getDevices()         
 			const Chimes = location.chimes
 			let count = 0
 			for (const Chime of Chimes) {
-				// 394630720 - Anatoly,  388700755 - Igor
+				console.log(`Chime name: ${Chime.name}. ID: ${Chime.id}`)
+
 				if (Chime.id == bellId) {
-					const newRingtone = await Chime.getRingtoneByDescription('Triangle', 'ding')
+					//const newRingtone = await Chime.getRingtoneByDescription('Triangle', 'ding')
 					Chime.setVolume(2)
 					console.log(Chime.name)
 					await Chime.playSound('ding')
