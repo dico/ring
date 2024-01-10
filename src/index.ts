@@ -16,7 +16,7 @@ const server = http.createServer((req: any, res: any) => {
 	const searchParams = myUrl.searchParams
 	const myBib = searchParams.get("bid");
 	const MyRefreshToken:string = process.env.REFRESH_TOKEN ?? ""
-	//console.log("Refresh Token:", MyRefreshToken);
+	console.log("Refresh Token:", MyRefreshToken);
 
 
 	async function DoorBell(bellId:any) {
